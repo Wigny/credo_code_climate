@@ -6,7 +6,7 @@ defmodule CredoCodeClimate.MixProject do
       app: :credo_code_climate,
       description: "Credo plugin for writing the CodeClimate-like result file",
       version: "0.1.0",
-      elixir: "~> 1.11",
+      elixir: "~> 1.15",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       package: package()
