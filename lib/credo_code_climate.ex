@@ -1,9 +1,13 @@
 defmodule CredoCodeClimate do
+  @moduledoc false
+
   import Credo.Plugin
 
   alias Credo.Execution
 
   defmodule Generate do
+    @moduledoc false
+
     use Credo.Execution.Task
 
     @json_lib if Code.ensure_loaded?(Jason), do: Jason, else: JSON
