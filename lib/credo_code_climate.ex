@@ -43,6 +43,7 @@ defmodule CredoCodeClimate do
 
       %{
         severity: severity(priority),
+        check_name: check_name,
         description: description,
         fingerprint: fingerprint,
         location: %{
