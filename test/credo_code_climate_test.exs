@@ -9,7 +9,7 @@ defmodule CredoCodeClimateTest do
         "lines" => %{"begin" => 3},
         "path" => "test/fixtures/issues.ex"
       },
-      "severity" => "minor"
+      "severity" => "major"
     },
     %{
       "description" => "Use a function call when a pipeline is only one function long.",
@@ -18,7 +18,7 @@ defmodule CredoCodeClimateTest do
         "lines" => %{"begin" => 5},
         "path" => "test/fixtures/issues.ex"
       },
-      "severity" => "major"
+      "severity" => "critical"
     },
     %{
       "description" => "There should be no calls to `IO.inspect/1`.",
@@ -27,7 +27,7 @@ defmodule CredoCodeClimateTest do
         "lines" => %{"begin" => 5},
         "path" => "test/fixtures/issues.ex"
       },
-      "severity" => "major"
+      "severity" => "critical"
     }
   ]
 

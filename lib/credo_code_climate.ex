@@ -59,11 +59,11 @@ defmodule CredoCodeClimate do
       }
     end
 
-    defp severity(p) when p >= 30, do: "blocker"
-    defp severity(p) when p in 20..29, do: "critical"
-    defp severity(p) when p in 10..19, do: "major"
-    defp severity(p) when p >= 0, do: "minor"
-    defp severity(_), do: "info"
+    defp severity(p) when p >= 20, do: "blocker"
+    defp severity(p) when p in 10..19, do: "critical"
+    defp severity(p) when p in 0..9, do: "major"
+    defp severity(p) when p in -10..-1, do: "minor"
+    defp severity(p) when p < -10, do: "info"
 
     defp hash(bin), do: :crypto.hash(:sha256, bin) |> Base.encode16(case: :lower)
   end
