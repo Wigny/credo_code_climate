@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Test Elixir ${{ matrix.elixir }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - elixir: '1.15.8'
+            otp: '26.2'
+            lint: false
+
+          - elixir: '1.19.2'
+            otp: '28.1'
+            lint: true
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: erlef/setup-beam@v1
+        with:
+          elixir-version: ${{ matrix.elixir }}
+          otp-version: ${{ matrix.otp }}
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-mix-${{ matrix.elixir }}-${{ matrix.otp }}-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-${{ matrix.elixir }}-${{ matrix.otp }}-
+
+      - run: mix deps.get --check-locked
+
+      - run: mix format --check-formatted
+        if: matrix.lint
+
+      - run: mix deps.unlock --check-unused
+        if: matrix.lint
+
+      - run: mix compile --no-optional-deps --warnings-as-errors
+        if: matrix.lint
+
+      - run: mix test --warnings-as-errors
