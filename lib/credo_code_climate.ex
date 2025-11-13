@@ -64,5 +64,9 @@ defmodule CredoCodeClimate do
     defp hash(bin), do: :crypto.hash(:sha256, bin) |> Base.encode16(case: :lower)
   end
 
-  def init(exec), do: append_task(exec, :run_command, Generate)
+  def init(exec) do
+    exec
+    |> register_cli_switch(:path, :string)
+    |> append_task(:run_command, Generate)
+  end
 end
