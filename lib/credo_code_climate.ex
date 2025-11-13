@@ -6,6 +6,8 @@ defmodule CredoCodeClimate do
   defmodule Generate do
     use Credo.Execution.Task
 
+    @json_lib if Code.ensure_loaded?(JSON), do: JSON, else: Code.ensure_loaded!(Jason)
+
     def call(exec, _opts) do
       case Execution.get_command_name(exec) do
         "suggest" -> do_run(exec)
@@ -20,7 +22,7 @@ defmodule CredoCodeClimate do
         exec
         |> Execution.get_issues()
         |> Enum.map(&format/1)
-        |> Jason.encode_to_iodata!()
+        |> @json_lib.encode_to_iodata!()
 
       File.write!(path, content)
 

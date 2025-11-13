@@ -26,7 +26,7 @@ defmodule CredoCodeClimate.MixProject do
   defp deps do
     [
       {:credo, "~> 1.5"},
-      {:jason, "~> 1.2"},
+      {:jason, "~> 1.2", optional: true},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
     ]
   end
