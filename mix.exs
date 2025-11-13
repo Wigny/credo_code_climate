@@ -25,7 +25,7 @@ defmodule CredoCodeClimate.MixProject do
 
   defp deps do
     [
-      {:credo, "~> 1.5"},
+      {:credo, "~> 1.6"},
       {:jason, "~> 1.2", optional: Version.compare(System.version(), "1.18.0") in [:eq, :gt]},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
     ]
